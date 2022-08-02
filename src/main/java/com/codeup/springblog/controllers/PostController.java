@@ -11,31 +11,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
     public String postsPage(){
 //        return "<h1>These are all of the posts on this page</h1>";
         return "/posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String postByIdPage(@PathVariable int id){
+    public String postByIdPage(@PathVariable long id){
 //        return String.format("This is the post for %d", id);
-        return "/posts/id";
+        return "/posts/view";
     }
 
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String createPostPage(){
 //        return "<h1>Create post here!</h1>";
         return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
     public String createdPost(){
 //        return "created post";
-        return "/posts/index";
+        return null;
     }
 }
