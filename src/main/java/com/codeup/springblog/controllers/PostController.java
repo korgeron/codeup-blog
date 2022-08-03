@@ -22,7 +22,6 @@ public class PostController {
         return "/posts/view";
     }
 
-
     @GetMapping("/posts/create")
     public String createPostPage(){
 //        return "<h1>Create post here!</h1>";

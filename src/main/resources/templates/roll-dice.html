@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head.html :: headStyle">
+    <meta charset="UTF-8">
+    <title>Dice Roll</title>
+
+</head>
+<body>
+
+<div th:replace="partials/nav.html :: navbar"></div>
+
+<h1 style="text-align: center">GUESS A NUMBER BETWEEN 1 AND 6!</h1>
+<div class="buttons" style="display: flex; justify-content: space-evenly; font-size: 20px">
+    <a href="/roll-dice/1">1</a>
+    <a href="/roll-dice/2">2</a>
+    <a href="/roll-dice/3">3</a>
+    <a href="/roll-dice/4">4</a>
+    <a href="/roll-dice/5">5</a>
+    <a href="/roll-dice/6">6</a>
+</div>
+<h4 th:text="${userChoice}"></h4>
+<h4 th:text="${random}"></h4>
+<h1 th:text="${answer}"></h1>
+<div th:if="${userChoice != null}">
+    <div class="dice">
+        <div class="square1">
+            <div th:text="${square1}"></div>
+        </div>
+        <div class="square2">
+            <div th:text="${square2}"></div>
+        </div>
+        <div class="square3">
+            <div th:text="${square3}"></div>
+        </div>
+        <div class="square4">
+            <div th:text="${square4}"></div>
+        </div>
+    </div>
+    <div th:text="${count}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headStyle">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            background: lightgrey;
+            padding: 0;
+            margin: 0;
+            height: 10vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .nav-ul {
+            display: flex;
+        }
+
+        .nav-ul > li {
+            list-style: none;
+        }
+
+        li > a {
+            color: black;
+            text-decoration: none;
+            margin-right: 2em;
+            transition: 1s ease-in;
+        }
+
+        li > a:hover {
+            color: orange;
+            transition: .5s ease-out;
+        }
+    </style>
+
+    <style>
+        .buttons > a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            background: lightblue;
+        }
+
+        .buttons > a:hover {
+            background: orange;
+        }
+
+        .dice {
+            height: 100px;
+            width: 100px;
+            background: grey;
+            position: relative;
+            top: 5em;
+            left: 28.5em;
+            display: grid;
+            grid-template-areas:
+                    'tl tr'
+                    'bl br';
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        .square1 {
+            grid-area: tl;
+            border-right: 1px solid white;
+            border-bottom: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            font-size: 41px
+        }
+
+        .square2 {
+            grid-area: tr;
+            border-left: 1px solid white;
+            border-bottom: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            font-size: 41px
+        }
+
+        .square3 {
+            grid-area: bl;
+            border-right: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            font-size: 41px
+        }
+
+        .square4 {
+            grid-area: br;
+            border-left: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            font-size: 41px;
+        }
+    </style>
+</head>
+</html>
