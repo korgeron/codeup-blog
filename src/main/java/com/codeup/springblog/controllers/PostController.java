@@ -18,9 +18,9 @@ public class PostController {
     @GetMapping("/posts")
     public String postsPage(Model model){
         List<Post> posts = new ArrayList<>();
-        posts.add(new Post(1L, "Post 1", "This is my post 1"));
-        posts.add(new Post(2L, "Post 2", "This is my post 2"));
-        posts.add(new Post(3L, "Post 3", "This is my post 3"));
+        posts.add(new Post(1L, "Post 1", "This is my post 1", "/posts/1"));
+        posts.add(new Post(2L, "Post 2", "This is my post 2", "/posts/2"));
+        posts.add(new Post(3L, "Post 3", "This is my post 3", "/posts/3"));
         model.addAttribute("posts", posts);
         return "/posts/index";
     }

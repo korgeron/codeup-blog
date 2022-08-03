@@ -4,8 +4,16 @@ public class Post {
     private Long id;
     private String title;
     private String body;
+    private String href;
 
     public Post() {
+    }
+
+    public Post(Long id, String title, String body, String href) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.href = href;
     }
 
     public Post(String title, String body) {
@@ -41,5 +49,13 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
     }
 }

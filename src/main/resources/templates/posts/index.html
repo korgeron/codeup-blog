@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head.html :: headStyle">
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="/partials/head.html :: headStyle('All Post')">
 </head>
 <body>
 
@@ -11,6 +9,7 @@
 <div th:each="post : ${posts}">
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.body}"></p>
+    <a th:href="${post.href}">See Post</a>
 </div>
 
 </body>
