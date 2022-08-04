@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials :: headStyle('Create Product')">
+
+</head>
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+
+<form action="/products/create" method="post">
+    <label for="name">Product Name</label>
+    <input type="text" id="name" name="name">
+    <label for="price">Product Price</label>
+    <input type="text" id="price" name="price">
+    <button type="submit">Add Product</button>
+</form>
+
+</body>
+</html>

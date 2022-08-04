@@ -6,9 +6,12 @@
     <nav th:replace="/partials/partials :: navbar"></nav>
 
     <div th:each="product : ${products}">
-        <h3 th:text="${product.name}"></h3>
+        <h3><a th:href="@{/products/{id}(id = ${product.id})}" th:text="${product.name}"></a></h3>
         <p th:text="${'For the low price of ' + product.price + '!'}"></p>
-
+        <form action="/products" method="POST">
+            <button type="submit" name="edit" th:value="${product.id}">Edit</button>
+            <button type="submit" name="delete" th:value="${product.id}">Delete</button>
+        </form>
     </div>
 </body>
 </html>
