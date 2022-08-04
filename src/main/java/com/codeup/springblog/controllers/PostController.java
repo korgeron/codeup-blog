@@ -21,6 +21,7 @@ public class PostController {
         this.pr = postRepository;
     }
 
+    //THIS HANDLES THE VIEWING OF ALL POST
     @GetMapping("/posts")
     public String viewAllPost(Model model){
         List<Post> posts = pr.findAll();
@@ -28,8 +29,15 @@ public class PostController {
         return "/posts/index";
     }
 
+    //THIS HANDLES THE DELETION OF A POST / PASSES ID TO EDIT METHOD / GRABS INDIVIDUAL POST TO DISPLAY ON SHOW PAGE
     @PostMapping("/posts")
-    public String deletePost(Long delete, Long edit, HttpSession session){
+    public String postMethods(Long delete, Long edit,Long show, HttpSession session, Model model){
+
+        if (show != null) {
+            Post post = pr.getById(show);
+            model.addAttribute("post", post);
+            return "/posts/show";
+        }
 
         if (edit != null) {
             session.setAttribute("edit", edit);
@@ -43,6 +51,11 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    //THIS HANDLES THE SINGLE AD PAGE
+    @GetMapping("/posts/show")
+    public String singleAdPage(){
+        return "/posts/show";
+    }
 //    @GetMapping("/posts/{id}")
 //    public String postByIdPage(@PathVariable long id, Model model){
 //        List<Post> posts = new ArrayList<>();
@@ -70,6 +83,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    //THESE HANDLE THE EDITING OF POST BY ID
     @GetMapping("/post/edit")
     public String editPostPage(){
         return "/posts/edit";
