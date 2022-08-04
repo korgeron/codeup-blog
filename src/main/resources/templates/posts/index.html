@@ -9,7 +9,10 @@
 <div th:each="post : ${posts}">
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.body}"></p>
-    <a th:href="${post.href}">See Post</a>
+    <form action="/posts" method="POST">
+
+        <button type="submit" name="delete" th:value="${post.id}">Delete</button>
+    </form>
 </div>
 
 </body>

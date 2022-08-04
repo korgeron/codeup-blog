@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/partials/head.html :: headStyle('All Products')"></head>
+
+<body>
+    <nav th:replace="/partials/nav.html :: navbar"></nav>
+
+    <div th:each="product : ${products}">
+        <h3 th:text="${product.name}"></h3>
+        <p th:text="${'For the low price of ' + product.price + '!'}"></p>
+
+    </div>
+</body>
+</html>

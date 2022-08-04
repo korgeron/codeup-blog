@@ -1,12 +1,12 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repos.PostRepository;
+import org.hibernate.annotations.Parameter;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +14,29 @@ import java.util.List;
 
 @Controller
 public class PostController {
+    public PostRepository pr;
+
+    public PostController (PostRepository postRepository) {
+        this.pr = postRepository;
+    }
 
     @GetMapping("/posts")
-    public String postsPage(Model model){
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post(1L, "Post 1", "This is my post 1", "/posts/1"));
-        posts.add(new Post(2L, "Post 2", "This is my post 2", "/posts/2"));
-        posts.add(new Post(3L, "Post 3", "This is my post 3", "/posts/3"));
-        model.addAttribute("posts", posts);
+    public String viewAllPost(Model model){
+        List<Post> posts = pr.findAll();
+        model.addAttribute("posts",posts);
         return "/posts/index";
+    }
+
+    @PostMapping("/posts")
+    public String deletePost(Long delete){
+
+        if (delete != null) {
+            Post post = pr.getById(delete);
+            pr.delete(post);
+        }
+
+
+        return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}")
@@ -39,13 +53,17 @@ public class PostController {
 
 
 
-//    @GetMapping("/posts/create")
-//    public String createPostPage(){
-//        return "/posts/create";
-//    }
-//
-//    @PostMapping("/posts/create")
-//    public String createdPost(){
-//        return null;
-//    }
+    @GetMapping("/post/create")
+    public String createPostPage( String title, String body){
+
+        return "/posts/create";
+    }
+
+    @PostMapping("/posts/create")
+    public String createdPost( String title, String body){
+        if (title != null && body != null) {
+            pr.save(new Post(title, body));
+        }
+        return "redirect:/posts";
+    }
 }

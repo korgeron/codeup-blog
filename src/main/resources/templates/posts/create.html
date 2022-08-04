@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/partials/head :: headStyle('Create Post')">
+
+</head>
+<body>
+<nav th:replace="/partials/nav.html :: navbar"></nav>
+<form action="/posts/create" method="POST">
+    <label for="post-title">Title</label>
+    <input id="post-title" name="title" type="text">
+    <label for="post-body">Title</label>
+    <input id="post-body" name="body" type="text">
+    <button type="submit">Post</button>
+</form>
+</body>
+</html>
