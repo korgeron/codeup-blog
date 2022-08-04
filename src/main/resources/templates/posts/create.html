@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head :: headStyle('Create Post')">
+<head th:replace="/partials/partials :: headStyle('Create Post')">
 
 </head>
 <body>
-<nav th:replace="/partials/nav.html :: navbar"></nav>
+<nav th:replace="/partials/partials :: navbar"></nav>
 <form action="/posts/create" method="POST">
     <label for="post-title">Title</label>
     <input id="post-title" name="title" type="text">

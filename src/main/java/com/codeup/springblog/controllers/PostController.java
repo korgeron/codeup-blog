@@ -2,14 +2,10 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repos.PostRepository;
-import org.hibernate.annotations.Parameter;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,19 +52,8 @@ public class PostController {
     public String singleAdPage(){
         return "/posts/show";
     }
-//    @GetMapping("/posts/{id}")
-//    public String postByIdPage(@PathVariable long id, Model model){
-//        List<Post> posts = new ArrayList<>();
-//        posts.add(new Post(1L, "Post 1", "This is my post 1"));
-//        posts.add(new Post(2L, "Post 2", "This is my post 2"));
-//        posts.add(new Post(3L, "Post 3", "This is my post 3"));
-//
-//        model.addAttribute("post", posts.get((int)id - 1));
-//
-//        return "/posts/show";
-//    }
 
-//THESE HANDLE THE CREATION OF POSTS
+    //THESE HANDLE THE CREATION OF POSTS
     @GetMapping("/post/create")
     public String createPostPage(){
 

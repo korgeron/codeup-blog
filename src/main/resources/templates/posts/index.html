@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head.html :: headStyle('All Post')">
+<head th:replace="/partials/partials :: headStyle('All Post')">
 </head>
 <body>
 
-<div th:replace="/partials/nav.html :: navbar"></div>
+<div th:replace="/partials/partials :: navbar"></div>
 
 <div th:each="post : ${posts}">
     <h1 th:text="${post.title}"></h1>

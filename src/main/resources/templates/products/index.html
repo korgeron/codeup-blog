@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/head.html :: headStyle('All Products')"></head>
+<head th:replace="/partials/partials :: headStyle('All Products')"></head>
 
 <body>
-    <nav th:replace="/partials/nav.html :: navbar"></nav>
+    <nav th:replace="/partials/partials :: navbar"></nav>
 
     <div th:each="product : ${products}">
         <h3 th:text="${product.name}"></h3>
