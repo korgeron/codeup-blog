@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class ProductController {
 
-    public ProductRepository pr;
+    private ProductRepository pr;
 
     public ProductController(ProductRepository pr){
         this.pr = pr;

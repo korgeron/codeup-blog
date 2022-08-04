@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 public class PostController {
-    public PostRepository pr;
+    private PostRepository pr;
 
     public PostController (PostRepository postRepository) {
         this.pr = postRepository;
@@ -27,14 +27,7 @@ public class PostController {
 
     //THIS HANDLES THE DELETION OF A POST / PASSES ID TO EDIT METHOD / GRABS INDIVIDUAL POST TO DISPLAY ON SHOW PAGE
     @PostMapping("/posts")
-    public String postMethods(Long delete, Long edit,Long show, HttpSession session, Model model){
-
-        if (show != null) {
-            Post post = pr.getById(show);
-            model.addAttribute("post", post);
-            return "/posts/show";
-        }
-
+    public String postMethods(Long delete, Long edit,HttpSession session){
         if (edit != null) {
             session.setAttribute("edit", edit);
             return "/posts/edit";
@@ -49,7 +42,7 @@ public class PostController {
 
     //THIS HANDLES THE SINGLE AD PAGE
     @GetMapping("/posts/show")
-    public String singleAdPage(){
+    public String singlePostPage(){
         return "/posts/show";
     }
 
@@ -81,5 +74,12 @@ public class PostController {
             pr.editPost(title, body, id);
         }
         return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/{id}")
+    public String singlePost(@PathVariable Long id, Model model){
+    Post p = pr.getById(id);
+    model.addAttribute("post", p);
+        return "/posts/show";
     }
 }
