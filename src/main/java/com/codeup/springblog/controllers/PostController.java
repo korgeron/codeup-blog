@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
+import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.List;
 @Controller
 public class PostController {
     private PostRepository pr;
+    private UserRepository ur;
 
-    public PostController (PostRepository postRepository) {
+    public PostController (PostRepository postRepository, UserRepository userRepository) {
         this.pr = postRepository;
+        this.ur = userRepository;
     }
 
     //THIS HANDLES THE VIEWING OF ALL POST
@@ -58,7 +62,8 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost( String title, String body){
         if (title != null && body != null) {
-            pr.save(new Post(title, body));
+            User user = ur.getById(1L);
+            pr.save(new Post(title, body, user));
         }
         return "redirect:/posts";
     }
