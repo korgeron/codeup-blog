@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -24,6 +25,7 @@ public class ProductController {
     @GetMapping("/products")
     public String allProducts(Model model) {
         List<Product> productList = pr.findAll();
+        Collections.reverse(productList);
         model.addAttribute("products", productList);
         return "products/index";
     }

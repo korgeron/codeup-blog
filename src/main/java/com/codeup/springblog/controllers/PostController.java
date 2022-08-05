@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -21,6 +22,7 @@ public class PostController {
     @GetMapping("/posts")
     public String viewAllPost(Model model){
         List<Post> posts = pr.findAll();
+        Collections.reverse(posts);
         model.addAttribute("posts",posts);
         return "/posts/index";
     }
