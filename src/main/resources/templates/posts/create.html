@@ -10,7 +10,20 @@
     <input id="post-title" name="title" type="text">
     <label for="post-body">Content</label>
     <input id="post-body" name="body" type="text">
+    <div th:each="tag : ${tags}" >
+        <label th:for="${tag.name}" th:text="${tag.name}"></label>
+        <input type="checkbox" name="tag" th:id="${tag.name}" th:value="${tag.id}">
+    </div>
+
+<!--    <select name="tag" id="tags">-->
+<!--        <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>-->
+<!--    </select>-->
     <button type="submit">Post</button>
+</form>
+<form action="/posts" method="post">
+    <label for="newTag">Create New Tag</label>
+    <input type="text" id="newTag" name="newTag">
+    <button type="submit">Create Tag</button>
 </form>
 </body>
 </html>

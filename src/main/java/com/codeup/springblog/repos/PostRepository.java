@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 
-
+//THIS IS MY POST REPO
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Transactional

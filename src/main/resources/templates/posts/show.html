@@ -8,6 +8,9 @@
 
 <h1 th:text="${post.title}"></h1>
 <p th:text="${post.body}"></p>
-
+<p th:text="${post.user.email}"></p>
+<ul>
+    <li th:each="tag : ${post.tags}" th:text="${tag.name}"></li>
+</ul>
 </body>
 </html>
