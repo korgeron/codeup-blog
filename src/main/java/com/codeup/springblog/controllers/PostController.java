@@ -6,6 +6,7 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.TagsRepository;
 import com.codeup.springblog.repos.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,13 @@ public class PostController {
     private PostRepository pr;
     private UserRepository ur;
     private TagsRepository tr;
+    private EmailService emailService;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository, TagsRepository tagsRepository) {
+    public PostController(PostRepository postRepository, UserRepository userRepository, TagsRepository tagsRepository, EmailService emailService) {
         this.pr = postRepository;
         this.ur = userRepository;
         this.tr = tagsRepository;
+        this.emailService = emailService;
     }
 
     //THIS HANDLES THE VIEWING OF ALL POST
@@ -114,6 +117,7 @@ public class PostController {
         post.setTags(t);
         post.setUser(user);
         pr.save(post);
+        emailService.prepareAndSend(user, post.getTitle(), post.getBody());
 
         return "redirect:/posts";
     }
