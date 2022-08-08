@@ -13,7 +13,7 @@ public class Tag {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @ManyToMany(mappedBy = "tags", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "tags")
     private List<Post> posts;
 
     public Tag() {

@@ -16,4 +16,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("UPDATE Post p SET p.title = :title, p.body = :body WHERE p.id = :id")
     Integer editPost(@Param ("title") String title, @Param("body") String body, @Param("id") Long id);
 
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Post p WHERE p.id = :id")
+    Integer deletePost (@Param("id") Long id);
+
 }

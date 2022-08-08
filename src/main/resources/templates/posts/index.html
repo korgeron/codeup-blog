@@ -10,7 +10,7 @@
     <h1><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></h1>
     <p th:text="${post.body}"></p>
     <form action="/posts" method="POST">
-        <button type="submit" name="edit" th:value="${post.id}">Edit</button>
+        <a th:href="@{/post/{id}/edit (id = ${post.id})}">Edit</a>
         <button type="submit" name="delete" th:value="${post.id}">Delete</button>
     </form>
 </div>

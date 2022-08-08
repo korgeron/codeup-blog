@@ -5,19 +5,16 @@
 </head>
 <body>
 <nav th:replace="/partials/partials :: navbar"></nav>
-<form action="/posts/create" method="POST">
+<form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
     <label for="post-title">Title</label>
-    <input id="post-title" name="title" type="text">
+    <input id="post-title" th:field="*{title}" type="text">
     <label for="post-body">Content</label>
-    <input id="post-body" name="body" type="text">
+    <input id="post-body" th:field="*{body}" type="text">
+    <input type="hidden" th:field="*{id}">
     <div th:each="tag : ${tags}" >
         <label th:for="${tag.name}" th:text="${tag.name}"></label>
         <input type="checkbox" name="tag" th:id="${tag.name}" th:value="${tag.id}">
     </div>
-
-<!--    <select name="tag" id="tags">-->
-<!--        <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>-->
-<!--    </select>-->
     <button type="submit">Post</button>
 </form>
 <form action="/posts" method="post">

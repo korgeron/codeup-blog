@@ -11,6 +11,7 @@ import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class PostController {
     private UserRepository ur;
     private TagsRepository tr;
 
-    public PostController (PostRepository postRepository, UserRepository userRepository, TagsRepository tagsRepository) {
+    public PostController(PostRepository postRepository, UserRepository userRepository, TagsRepository tagsRepository) {
         this.pr = postRepository;
         this.ur = userRepository;
         this.tr = tagsRepository;
@@ -31,19 +32,20 @@ public class PostController {
 
     //THIS HANDLES THE VIEWING OF ALL POST
     @GetMapping("/posts")
-    public String viewAllPost(Model model){
+    public String viewAllPost(Model model) {
         List<Post> posts = pr.findAll();
         Collections.reverse(posts);
-        model.addAttribute("posts",posts);
+        model.addAttribute("posts", posts);
         return "/posts/index";
     }
 
     //THIS HANDLES THE DELETION OF A POST / PASSES ID TO EDIT METHOD
     @PostMapping("/posts")
-    public String postMethods(Long delete, Long edit,HttpSession session, String newTag){
+    public String postMethods(Long delete, String newTag, Long edit) {
+
         if (edit != null) {
-            session.setAttribute("edit", edit);
-            return "/posts/edit";
+            System.out.println(edit);
+            return "redirect:/post/edit";
         }
 
         if (newTag != null) {
@@ -52,65 +54,68 @@ public class PostController {
         }
 
         if (delete != null) {
-            Post post = pr.getById(delete);
-            pr.delete(post);
+//            Post p = pr.getById(delete);
+            pr.deletePost(delete);
         }
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/post/{id}/edit")
+    public String editPostPage(@PathVariable Long id ,Model model){
+        model.addAttribute("post", pr.getById(id));
+        model.addAttribute("tags", tr.findAll());
+        return "/posts/create";
+    }
+
+    @PostMapping("/post/{id}/edit")
+    public String editPost (@RequestParam List<Long> tag, @ModelAttribute Post post){
+        User user = ur.getById(1L);
+        List<Tag> t = new ArrayList<>();
+        for (Long id : tag) {
+            Tag allTags = tr.getById(id);
+            t.add(allTags);
+        }
+        post.setUser(user);
+        post.setTags(t);
+        pr.save(post);
         return "redirect:/posts";
     }
 
     //THIS HANDLES THE SINGLE AD PAGE
     @GetMapping("/posts/show")
-    public String singlePostPage(){
+    public String singlePostPage() {
         return "/posts/show";
     }
 
     //THESE HANDLE THE CREATION OF POSTS
     @GetMapping("/post/create")
-    public String createPostPage(Model model){
+    public String createPostPage(Model model) {
+        model.addAttribute("post", new Post());
         model.addAttribute("tags", tr.findAll());
         return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String createPost(String title, String body,@RequestParam List<Long> tag){
-        try {
-            if (title != null && body != null) {
-                User user = ur.getById(1L);
-                List<Tag> t = new ArrayList<>();
-                for (Long id : tag) {
-                    Tag allTags = tr.getById(id);
-                    t.add(allTags);
-                }
+    public String createPost(@RequestParam List<Long> tag, @ModelAttribute Post post) {
 
-                System.out.println(tag);
-                Post p = new Post(title, body, user, t);
-                pr.save(p);
-            }
-        } catch (RuntimeException re){
-            throw new RuntimeException("whats going on here?", re);
+        User user = ur.getById(1L);
+        List<Tag> t = new ArrayList<>();
+        for (Long id : tag) {
+            Tag allTags = tr.getById(id);
+            t.add(allTags);
         }
+        post.setTags(t);
+        post.setUser(user);
+        pr.save(post);
+
         return "redirect:/posts";
     }
 
-    //THESE HANDLE THE EDITING OF POST BY ID
-    @GetMapping("/post/edit")
-    public String editPostPage(){
-        return "/posts/edit";
-    }
-
-    @PostMapping("/posts/edit")
-    public String editPost( String title, String body, HttpSession session){
-        Long id = (Long) session.getAttribute("edit");
-        if (title != null && body != null) {
-            pr.editPost(title, body, id);
-        }
-        return "redirect:/posts";
-    }
 
     @GetMapping("/posts/{id}")
-    public String singlePost(@PathVariable Long id, Model model){
-    Post p = pr.getById(id);
-    model.addAttribute("post", p);
+    public String singlePost(@PathVariable Long id, Model model) {
+        Post p = pr.getById(id);
+        model.addAttribute("post", p);
         return "/posts/show";
     }
 }
