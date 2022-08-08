@@ -54,12 +54,12 @@ public class PostController {
         }
 
         if (delete != null) {
-//            Post p = pr.getById(delete);
             pr.deletePost(delete);
         }
         return "redirect:/posts";
     }
 
+    //THESE HANDLE THE EDITING OF A POST
     @GetMapping("/post/{id}/edit")
     public String editPostPage(@PathVariable Long id ,Model model){
         model.addAttribute("post", pr.getById(id));
@@ -87,6 +87,13 @@ public class PostController {
         return "/posts/show";
     }
 
+    @GetMapping("/posts/{id}")
+    public String singlePost(@PathVariable Long id, Model model) {
+        Post p = pr.getById(id);
+        model.addAttribute("post", p);
+        return "/posts/show";
+    }
+
     //THESE HANDLE THE CREATION OF POSTS
     @GetMapping("/post/create")
     public String createPostPage(Model model) {
@@ -109,13 +116,5 @@ public class PostController {
         pr.save(post);
 
         return "redirect:/posts";
-    }
-
-
-    @GetMapping("/posts/{id}")
-    public String singlePost(@PathVariable Long id, Model model) {
-        Post p = pr.getById(id);
-        model.addAttribute("post", p);
-        return "/posts/show";
     }
 }
