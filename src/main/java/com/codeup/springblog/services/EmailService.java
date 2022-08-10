@@ -1,6 +1,5 @@
 package com.codeup.springblog.services;
 
-import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

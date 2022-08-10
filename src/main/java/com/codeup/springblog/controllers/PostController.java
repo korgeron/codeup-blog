@@ -9,6 +9,7 @@ import com.codeup.springblog.repos.UserRepository;
 import com.codeup.springblog.services.EmailService;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.connector.Request;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +73,7 @@ public class PostController {
 
     @PostMapping("/post/{id}/edit")
     public String editPost (@RequestParam List<Long> tag, @ModelAttribute Post post){
-        User user = ur.getById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Tag> t = new ArrayList<>();
         for (Long id : tag) {
             Tag allTags = tr.getById(id);
@@ -108,7 +109,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost(@RequestParam List<Long> tag, @ModelAttribute Post post) {
 
-        User user = ur.getById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Tag> t = new ArrayList<>();
         for (Long id : tag) {
             Tag allTags = tr.getById(id);

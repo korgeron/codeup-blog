@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/partials/partials :: headStyle('Save Post')">
 
 </head>
 <body>
 <nav th:replace="/partials/partials :: navbar"></nav>
-<form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
-    <label for="post-title">Title</label>
-    <input id="post-title" th:field="*{title}" type="text">
-    <label for="post-body">Content</label>
-    <input id="post-body" th:field="*{body}" type="text">
-    <input type="hidden" th:field="*{id}">
-    <div th:each="tag : ${tags}" >
-        <label th:for="${tag.name}" th:text="${tag.name}"></label>
-        <input type="checkbox" name="tag" th:id="${tag.name}" th:value="${tag.id}">
-    </div>
-    <button type="submit">Post</button>
-</form>
-<form action="/posts" method="post">
-    <label for="newTag">Create New Tag</label>
-    <input type="text" id="newTag" name="newTag">
-    <button type="submit">Create Tag</button>
-</form>
+<div >
+    <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+        <label for="post-title">Title</label>
+        <input id="post-title" th:field="*{title}" type="text">
+        <label for="post-body">Content</label>
+        <input id="post-body" th:field="*{body}" type="text">
+        <input type="hidden" th:field="*{id}">
+        <div th:each="tag : ${tags}">
+            <label th:for="${tag.name}" th:text="${tag.name}"></label>
+            <input type="checkbox" name="tag" th:id="${tag.name}" th:value="${tag.id}">
+        </div>
+        <button type="submit">Post</button>
+    </form>
+    <form action="/posts" method="post">
+        <label for="newTag">Create New Tag</label>
+        <input type="text" id="newTag" name="newTag">
+        <button type="submit">Create Tag</button>
+    </form>
+</div>
 </body>
 </html>

@@ -10,10 +10,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
     private String email;
 
     @Column(nullable = false, length = 100)
@@ -35,6 +35,13 @@ public class User {
 
     public User() {
 
+    }
+
+    public User(User copy){
+        this.id = copy.id;
+        this.username = copy.username;
+        this.password = copy.password;
+        this.email = copy.email;
     }
 
     public User(String email, String password, String username) {

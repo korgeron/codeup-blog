@@ -106,6 +106,17 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/roll-dice">DICE</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"  href="/sign-up">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"  href="/login">Login</a>
+                    </li>
+                    <li>
+                        <form th:action="@{/logout}" th:method="post">
+                            <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
